@@ -41,8 +41,7 @@ export const siteConfig: SiteConfig = {
   intro: "I build scalable full-stack applications and real-time AI systems.",
   description:
     "Final-year Computer Science student at IIIT Manipur, working across software engineering, computer vision, and applied ML — with a systems-and-optimization mindset for products that run fast and scale cleanly.",
-  // TODO(you): point this at your custom domain when it's live.
-  url: "https://example.com",
+  url: "https://akankshagupta.org",
   profilePhoto: "/my-pic.jpg",
   links: {
     github: "https://github.com/AkankshaGupta259",
