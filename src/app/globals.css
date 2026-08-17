@@ -59,6 +59,15 @@
 /* ── Base ──────────────────────────────────────────────────────── */
 html {
   color-scheme: dark;
+  /* Never allow sideways scroll. The scene backgrounds are fixed/absolute to
+     the viewport, so any horizontal scroll (or touch rubber-band) exposes the
+     bare page edge past them on mobile. `clip` (not `hidden`) does not create
+     a scroll container, so `position: sticky`/`fixed` keep working. */
+  overflow-x: clip;
+  /* Stop iOS Safari from auto-inflating text — a common source of mobile
+     horizontal overflow. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -67,6 +76,10 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  /* Prevent the horizontal rubber-band overscroll that briefly reveals the
+     page edge past the fixed background on touch devices. */
+  overscroll-behavior-x: none;
 }
 
 /* Nicer text wrapping for headings/leads */
