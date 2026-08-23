@@ -1,4 +1,5 @@
 import { PersonalBackground } from "@/components/backgrounds/PersonalBackground";
+import { PrewarmPersonalApi } from "@/components/personal/PrewarmPersonalApi";
 
 /**
  * Wraps the entire hidden surface (gateway, viewer, auth) in the personal
@@ -13,6 +14,7 @@ export default function PersonalLayout({
 }) {
   return (
     <div className="theme-personal relative min-h-dvh bg-background text-foreground">
+      <PrewarmPersonalApi />
       <PersonalBackground />
       <div className="relative z-10 min-h-dvh">{children}</div>
     </div>

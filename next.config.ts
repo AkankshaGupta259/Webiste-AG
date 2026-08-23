@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "*.supabase.co" },
     ],
   },
+  // Allow the dev server to serve HMR assets to devices on the local network.
+  // This is needed when testing from a phone via http://<your-PC-IP>:3000.
+  allowedDevOrigins: ["192.168.0.*", "127.0.0.1", "10.64.137.92"],
 };
 
 export default nextConfig;

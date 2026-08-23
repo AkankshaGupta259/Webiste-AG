@@ -28,6 +28,7 @@ export function Constellation({ className = "" }: { className?: string }) {
     let width = 0;
     let height = 0;
     let dpr = 1;
+    let lastW = 0;
     type Pt = { x: number; y: number; vx: number; vy: number };
     let points: Pt[] = [];
     const mouse = { x: -9999, y: -9999 };
@@ -118,8 +119,17 @@ export function Constellation({ className = "" }: { className?: string }) {
       mouse.y = -9999;
     }
 
+    // Only re-seed on a real width change — mobile scroll toggles the address
+    // bar (height-only resize) and re-seeding there makes the field flicker.
+    function onResize() {
+      if (window.innerWidth === lastW) return;
+      lastW = window.innerWidth;
+      resize();
+    }
+
+    lastW = window.innerWidth;
     resize();
-    window.addEventListener("resize", resize);
+    window.addEventListener("resize", onResize);
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerleave", onLeave);
 
@@ -131,7 +141,7 @@ export function Constellation({ className = "" }: { className?: string }) {
 
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", onResize);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerleave", onLeave);
     };

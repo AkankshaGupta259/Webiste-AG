@@ -243,13 +243,23 @@ export function BioForest() {
   const front = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    let lastW = 0;
     function draw() {
       if (back.current) paint(back.current, "back");
       if (front.current) paint(front.current, "front");
     }
+    // Only redraw on a real width change. On mobile, scrolling shows/hides the
+    // address bar, which fires `resize` with a new height only — redrawing then
+    // re-randomises the whole grove and makes the background flicker on scroll.
+    function onResize() {
+      if (window.innerWidth === lastW) return;
+      lastW = window.innerWidth;
+      draw();
+    }
+    lastW = window.innerWidth;
     draw();
-    window.addEventListener("resize", draw);
-    return () => window.removeEventListener("resize", draw);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   return (

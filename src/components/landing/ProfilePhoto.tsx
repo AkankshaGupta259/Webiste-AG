@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import { siteConfig, getInitials } from "@/config/site";
 import { routes } from "@/lib/routes";
 import { useSecretEntry } from "@/hooks/useSecretEntry";
+import { prewarmPersonalApi } from "@/lib/prewarm";
 
 /**
  * ProfilePhoto
@@ -23,8 +24,14 @@ export function ProfilePhoto() {
   const router = useRouter();
 
   const { onClick } = useSecretEntry({
-    onViewer: () => router.push(routes.personalGateway),
-    onAuth: () => router.push(routes.personalAuth),
+    onViewer: () => {
+      prewarmPersonalApi(); // start waking the backend the instant intent is shown
+      router.push(routes.personalGateway);
+    },
+    onAuth: () => {
+      prewarmPersonalApi();
+      router.push(routes.personalAuth);
+    },
   });
 
   return (

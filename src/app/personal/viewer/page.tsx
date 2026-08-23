@@ -42,7 +42,7 @@ export default async function ViewerHubPage() {
             <li key={category.id}>
               <Link
                 href={categoryHref(category.id)}
-                className="group flex h-full flex-col gap-3 rounded-2xl border border-border bg-background-elevated/50 p-6 transition-all hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="group flex h-full flex-col gap-3 rounded-2xl border border-border bg-background-elevated/50 p-6 transition-all hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <span className="text-3xl" aria-hidden="true">
                   {category.emoji}
