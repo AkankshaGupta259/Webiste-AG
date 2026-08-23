@@ -129,13 +129,23 @@ export function ProceduralForest() {
   const front = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    let lastW = 0;
     function draw() {
       if (back.current) paint(back.current, "back");
       if (front.current) paint(front.current, "front");
     }
+    // Redraw only when the width actually changes. Mobile scroll toggles the
+    // address bar, firing `resize` with a height-only change; redrawing there
+    // makes the forest visibly jump/flicker while scrolling.
+    function onResize() {
+      if (window.innerWidth === lastW) return;
+      lastW = window.innerWidth;
+      draw();
+    }
+    lastW = window.innerWidth;
     draw();
-    window.addEventListener("resize", draw);
-    return () => window.removeEventListener("resize", draw);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   return (

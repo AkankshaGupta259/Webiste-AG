@@ -29,13 +29,13 @@ export default function PersonalGatewayPage() {
       <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
         <Link
           href={routes.personalViewer}
-          className="rounded-full bg-foreground px-6 py-2.5 text-sm font-medium text-background transition-colors hover:bg-accent-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="rounded-full bg-foreground px-6 py-2.5 text-sm font-medium text-background transition-all hover:bg-accent-strong active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           Enter the universe →
         </Link>
         <Link
           href={routes.home}
-          className="rounded-full border border-border-strong px-6 py-2.5 text-sm text-foreground transition-colors hover:bg-surface"
+          className="rounded-full border border-border-strong px-6 py-2.5 text-sm text-foreground transition-all hover:bg-surface active:scale-95"
         >
           Maybe later
         </Link>

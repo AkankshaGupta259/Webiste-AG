@@ -20,7 +20,7 @@ export default function PortfolioPage() {
         </h1>
         <p className="mt-5 text-pretty text-lg text-foreground-muted">
           {/* {siteConfig.description} */}
-          Hi! I enjoy building intelligent systems that solve real-world problems and turning complex ideas into elegant, user-friendly solutions. Whether it's developing scalable software or exploring emerging technologies, I'm driven by curiosity, continuous learning, and a passion for making technology more accessible.
+          Hi! I enjoy building intelligent systems that solve real-world problems and turning complex ideas into elegant, user-friendly solutions. Whether it&apos;s developing scalable software or exploring emerging technologies, I&apos;m driven by curiosity, continuous learning, and a passion for making technology more accessible.
         </p>
       </header>
 

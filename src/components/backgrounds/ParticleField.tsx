@@ -38,6 +38,7 @@ export function ParticleField({
     const mouse = { x: 0, y: 0 };
     let w = 0;
     let h = 0;
+    let lastW = 0;
 
     type P = { x: number; y: number; z: number; vx: number; vy: number; r: number; c: string; a: number };
     let ps: P[] = [];
@@ -114,15 +115,24 @@ export function ParticleField({
       mouse.y = ((e.clientY - r.top) / r.height - 0.5) * 2;
     }
 
+    // Re-seed only on a real width change. Mobile scroll toggles the address
+    // bar (height-only resize); re-seeding there makes particles jump.
+    function onResize() {
+      if (window.innerWidth === lastW) return;
+      lastW = window.innerWidth;
+      resize();
+    }
+
+    lastW = window.innerWidth;
     resize();
-    window.addEventListener("resize", resize);
+    window.addEventListener("resize", onResize);
     window.addEventListener("pointermove", onMove);
     if (reduce) draw();
     else loop();
 
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", onResize);
       window.removeEventListener("pointermove", onMove);
     };
   }, [colors, mode, density]);

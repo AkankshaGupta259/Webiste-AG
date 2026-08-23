@@ -527,3 +527,81 @@ body {
     animation: none !important;
   }
 }
+
+/*
+ * ────────────────────────────────────────────────────────────────
+ *  GALAXY LOADER  (personal-side loading state)
+ *  A slow spiral that breathes — expanding and contracting — while the
+ *  hidden side's content streams in. Pure CSS (spin + breathe use the
+ *  independent `rotate`/`scale` transform properties so they compose).
+ *  Holds a calm static spiral under prefers-reduced-motion.
+ * ────────────────────────────────────────────────────────────────
+ */
+.galaxy {
+  position: relative;
+  width: min(46vw, 176px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  scale: 0.85;
+  animation: galaxy-breathe 3.4s ease-in-out infinite;
+}
+.galaxy__arm {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    var(--accent) 55deg,
+    transparent 150deg,
+    var(--aurora-1) 240deg,
+    transparent 340deg
+  );
+  -webkit-mask: radial-gradient(circle, transparent 10%, #000 22%, #000 66%, transparent 74%);
+  mask: radial-gradient(circle, transparent 10%, #000 22%, #000 66%, transparent 74%);
+  opacity: 0.65;
+  animation: galaxy-spin 9s linear infinite;
+}
+.galaxy__arm--2 {
+  scale: 0.62;
+  opacity: 0.4;
+  animation: galaxy-spin 14s linear infinite reverse;
+}
+.galaxy__core {
+  position: absolute;
+  width: 26%;
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  background: radial-gradient(circle, var(--accent-strong), var(--accent) 45%, transparent 72%);
+  filter: blur(1px);
+  animation: galaxy-core 3.4s ease-in-out infinite;
+}
+.galaxy__halo {
+  position: absolute;
+  inset: 8%;
+  border-radius: 9999px;
+  box-shadow: 0 0 42px 6px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+@keyframes galaxy-spin {
+  to { rotate: 360deg; }
+}
+@keyframes galaxy-breathe {
+  0%, 100% { scale: 0.8; }
+  50% { scale: 1.06; }
+}
+@keyframes galaxy-core {
+  0%, 100% { opacity: 0.75; scale: 0.9; }
+  50% { opacity: 1; scale: 1.18; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galaxy,
+  .galaxy__arm,
+  .galaxy__arm--2,
+  .galaxy__core {
+    animation: none !important;
+    scale: 1;
+  }
+}
