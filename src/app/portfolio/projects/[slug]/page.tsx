@@ -61,7 +61,7 @@ export default async function ProjectCaseStudy({
         {hasLinks ? (
           <div className="mt-6 flex flex-wrap gap-3">
             {github ? <LinkButton href={github} label="GitHub" primary /> : null}
-            {demo ? <LinkButton href={demo} label="Live demo" /> : null}
+            {demo ? <LinkButton href={demo} label="Web App" /> : null}
             {resources?.map((r: ResourceLink) => (
               <LinkButton key={r.href} href={r.href} label={r.label} />
             ))}

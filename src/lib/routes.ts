@@ -9,7 +9,7 @@ export const routes = {
   // Professional surface
   portfolio: "/portfolio",
   projects: "/portfolio/projects",
-  resume: "/portfolio/resume",
+  experience: "/portfolio/experience",
   college: "/portfolio/college",
   school: "/portfolio/school",
 

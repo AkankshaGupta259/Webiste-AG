@@ -48,11 +48,30 @@ export interface Project {
 export interface ExperienceItem {
   role: string;
   org: string;
-  type?: string; // e.g. "Internship", "Leadership"
-  location?: string;
+  type?: string; // e.g. "Research Internship", "Student Leadership"
+  location?: string; // e.g. "Onsite", "Remote"
   start: string;
   end: string; // or "Present"
   bullets: string[];
+  /** Certificate slug (see content/certificates.ts) → "View certificate" link. */
+  certificate?: string;
+}
+
+/** A certification or course, shown in the "Certifications & Courses" section. */
+export interface CertificationItem {
+  title: string;
+  issuer?: string; // e.g. "Swayam (NPTEL)"
+  year?: string;
+  bullets?: string[];
+  /** Certificate slug (see content/certificates.ts). */
+  certificate?: string;
+}
+
+/** An achievement line, optionally linking to its detailed card elsewhere. */
+export interface AchievementItem {
+  text: string;
+  /** Link to a fuller description (e.g. its College activity page). */
+  href?: string;
 }
 
 export interface EducationItem {
@@ -73,11 +92,22 @@ export interface ResumeData {
   summary: string;
   skills: SkillGroup[];
   experience: ExperienceItem[];
+  /** Leadership & project-coordination roles (shown as a distinct section). */
+  leadership: ExperienceItem[];
   education: EducationItem[];
-  achievements: string[];
+  certifications: CertificationItem[];
+  achievements: AchievementItem[];
   research: string[];
-  /** Path to the downloadable PDF in /public. */
-  resumePdf?: string;
+  /**
+   * Role-targeted résumé PDFs in /public. The download control offers the
+   * viewer a role, then hands them the matching file. A missing entry shows
+   * as "coming soon" rather than breaking the button.
+   */
+  resumesByRole?: {
+    sde?: string;
+    aiml?: string;
+    management?: string;
+  };
 }
 
 /* ── Activities (college / school) ──────────────────────────────── */
