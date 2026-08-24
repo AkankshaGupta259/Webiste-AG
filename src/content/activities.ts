@@ -65,13 +65,6 @@ export const collegeActivities: ActivityItem[] = [
     category: "Workshop",
     description: "Discussions on regional innovation and opportunities.",
   },
-  {
-    slug: "spoken-tutorial-program",
-    title: "Spoken Tutorial Program",
-    org: "IIT Bombay",
-    category: "Workshop",
-    description: "Completed HTML certification; currently pursuing Java.",
-  },
 ];
 
 /**

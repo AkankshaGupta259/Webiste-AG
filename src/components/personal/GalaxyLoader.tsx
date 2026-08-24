@@ -5,7 +5,7 @@
  * Pure CSS (see `.galaxy` in globals.css); no client JS required.
  */
 export function GalaxyLoader({
-  label = "entering the universe",
+  label = "Opening Up",
 }: {
   label?: string;
 }) {

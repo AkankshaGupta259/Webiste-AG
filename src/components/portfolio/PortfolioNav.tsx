@@ -85,7 +85,7 @@ export function PortfolioNav() {
                       : "text-foreground-muted hover:text-foreground"
                   }`}
                 >
-                  {section.label}
+                  {section.shortLabel ?? section.label}
                 </Link>
               </li>
             );
