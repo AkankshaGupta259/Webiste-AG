@@ -43,6 +43,7 @@ export const collegeActivities: ActivityItem[] = [
       "Selected as a Youth Ambassador for the Reserve Bank of India, leading financial-literacy outreach.",
     body:
       "Planned and executed 4+ financial-literacy sessions for 150+ participants, acting as the primary liaison between RBI officials and institute stakeholders and coordinating a cross-functional team to deliver the outreach on schedule.",
+    gallery: ["/events/rbi-youth-ambassador.jpg"],
     // certificate: placeholder — file not provided yet.
   },
   {
@@ -141,6 +142,10 @@ export const schoolActivities: ActivityItem[] = [
     category: "Workshop",
     description:
       "Gained insights into satellite technology and geospatial applications.",
+    body:
+      "Participated in the IIRS-ISRO Outreach Program (2022), gaining hands-on insights into satellite technology, remote sensing, and geospatial applications.",
+    certificate: "iirs-isro",
+    gallery: ["/events/iirs-isro-1.jpg", "/events/iirs-isro-2.jpg"],
   },
 ];
 

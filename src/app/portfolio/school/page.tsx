@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import {
-  SectionHeading,
-  SectionPlaceholder,
-} from "@/components/portfolio/SectionHeading";
+import { SectionHeading } from "@/components/portfolio/SectionHeading";
+import { ActivityCard } from "@/components/portfolio/ActivityCard";
+import { schoolActivities } from "@/content/activities";
+import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = { title: "School Activities" };
 
@@ -12,9 +12,19 @@ export default function SchoolPage() {
       <SectionHeading
         eyebrow="Before college"
         title="School Activities"
-        lead="Achievements and activities from school, kept visually consistent with the rest of the portfolio."
+        lead="Achievements and activities from before college. Open any card for the full story, photos, and its certificate."
       />
-      <SectionPlaceholder note="Content for this section is still to come — share your school achievements and activities and we'll add them here." />
+
+      <ul className="grid gap-4 sm:grid-cols-2">
+        {schoolActivities.map((activity) => (
+          <li key={activity.slug}>
+            <ActivityCard
+              activity={activity}
+              href={`${routes.school}/${activity.slug}`}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
