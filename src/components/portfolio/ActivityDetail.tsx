@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { ActivityItem } from "@/content/types";
 import { CertificateEmbed } from "./CertificateEmbed";
+import { PhotoGallery } from "./PhotoGallery";
 
 /**
  * Full detail view for a single activity, shared by College and School.
@@ -78,22 +79,7 @@ export function ActivityDetail({
           <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-foreground-subtle">
             Photos
           </h2>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {activity.gallery.map((src) => (
-              <div
-                key={src}
-                className="relative aspect-square overflow-hidden rounded-xl border border-border bg-surface"
-              >
-                <Image
-                  src={src}
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 50vw, 240px"
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
+          <PhotoGallery photos={activity.gallery} />
         </section>
       ) : null}
 
