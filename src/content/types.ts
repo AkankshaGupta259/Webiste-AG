@@ -122,6 +122,13 @@ export type ActivityCategory =
   | "Workshop"
   | "Achievement";
 
+/** Grouping used to organize the College page into labelled sections. */
+export type ActivitySection =
+  | "Leadership & Roles"
+  | "Technical Events & Workshops"
+  | "Competitions"
+  | "Cultural & Arts";
+
 /** A certificate / proof link attached to an activity. */
 export interface ActivityLink {
   label: string;
@@ -137,6 +144,8 @@ export interface ActivityItem {
   /** Human-readable date or range. */
   date?: string;
   category: ActivityCategory;
+  /** Which College section this belongs to (grouping). */
+  section?: ActivitySection;
   /** Short summary shown on the card. */
   description?: string;
   /** Longer prose shown on the activity's detail page. */
@@ -145,6 +154,6 @@ export interface ActivityItem {
   coverImage?: string;
   /** Photos from the event/activity (added later). */
   gallery?: string[];
-  /** Certificate or proof link, e.g. a workshop certification. */
-  certificate?: ActivityLink;
+  /** Certificate slug (see content/certificates.ts) — embedded on the detail page. */
+  certificate?: string;
 }

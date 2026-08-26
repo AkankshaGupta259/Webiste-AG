@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { ActivityItem } from "@/content/types";
+import { CertificateEmbed } from "./CertificateEmbed";
 
 /**
  * Full detail view for a single activity, shared by College and School.
@@ -67,6 +68,11 @@ export function ActivityDetail({
         </p>
       ) : null}
 
+      {/* Certificate — embedded right below the description. */}
+      {activity.certificate ? (
+        <CertificateEmbed slug={activity.certificate} />
+      ) : null}
+
       {activity.gallery && activity.gallery.length ? (
         <section className="mt-10">
           <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-foreground-subtle">
@@ -91,18 +97,6 @@ export function ActivityDetail({
         </section>
       ) : null}
 
-      {activity.certificate ? (
-        <div className="mt-10">
-          <a
-            href={activity.certificate.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex rounded-full border border-border-strong px-5 py-2 text-sm text-foreground transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            {activity.certificate.label}
-          </a>
-        </div>
-      ) : null}
     </article>
   );
 }
