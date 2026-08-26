@@ -243,23 +243,28 @@ export function BioForest() {
   const front = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    const el = back.current;
+    if (!el) return;
     let lastW = 0;
     function draw() {
       if (back.current) paint(back.current, "back");
       if (front.current) paint(front.current, "front");
     }
-    // Only redraw on a real width change. On mobile, scrolling shows/hides the
-    // address bar, which fires `resize` with a new height only — redrawing then
-    // re-randomises the whole grove and makes the background flicker on scroll.
-    function onResize() {
-      if (window.innerWidth === lastW) return;
-      lastW = window.innerWidth;
+    // Redraw when the canvas's rendered WIDTH settles or changes. A
+    // ResizeObserver (not window 'resize') catches the first-paint layout
+    // settle — so the scene never stays drawn at a stale width until a manual
+    // refresh — while the width-only guard still ignores mobile address-bar
+    // height changes (which would otherwise re-randomise the grove on scroll).
+    draw(); // instant paint at the current width
+    lastW = el.clientWidth; // so an unchanged first observation doesn't redraw
+    const ro = new ResizeObserver((entries) => {
+      const w = Math.round(entries[0].contentRect.width);
+      if (!w || w === lastW) return;
+      lastW = w;
       draw();
-    }
-    lastW = window.innerWidth;
-    draw();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
   }, []);
 
   return (

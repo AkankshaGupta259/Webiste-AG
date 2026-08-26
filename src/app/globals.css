@@ -389,6 +389,12 @@ body {
 
 /* ── Technical: ancient bioluminescent forest (from background-inspo) ── */
 .scene--tech {
+  /* Pin to the viewport (not the scrollable page). The `.scene` base sets
+     position:absolute — and being unlayered it beats Tailwind's `fixed`
+     utility — so we re-assert `fixed` here. Without this the scene stretches
+     to the full page height, which isn't known on first paint, and the forest
+     canvas draws at the wrong height (squeezed/stretched until a refresh). */
+  position: fixed;
   background: #040a14;
 }
 

@@ -115,24 +115,28 @@ export function ParticleField({
       mouse.y = ((e.clientY - r.top) / r.height - 0.5) * 2;
     }
 
-    // Re-seed only on a real width change. Mobile scroll toggles the address
-    // bar (height-only resize); re-seeding there makes particles jump.
-    function onResize() {
-      if (window.innerWidth === lastW) return;
-      lastW = window.innerWidth;
+    // Seed/redraw when the canvas's rendered WIDTH settles or changes. The
+    // ResizeObserver's first callback fires after layout, so the field is
+    // sized correctly on the first paint (not a stale width until refresh).
+    // The width-only guard ignores mobile address-bar height changes, which
+    // would otherwise make the particles jump on scroll.
+    resize(); // instant seed at the current width
+    lastW = canvas!.clientWidth; // so an unchanged first observation doesn't re-seed
+    const ro = new ResizeObserver((entries) => {
+      const w = Math.round(entries[0].contentRect.width);
+      if (!w || w === lastW) return;
+      lastW = w;
       resize();
-    }
-
-    lastW = window.innerWidth;
-    resize();
-    window.addEventListener("resize", onResize);
+      if (reduce) draw();
+    });
+    ro.observe(canvas!);
     window.addEventListener("pointermove", onMove);
     if (reduce) draw();
     else loop();
 
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("resize", onResize);
+      ro.disconnect();
       window.removeEventListener("pointermove", onMove);
     };
   }, [colors, mode, density]);
